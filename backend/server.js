@@ -12,7 +12,7 @@ const normalizePort = val => {
   }
   return false
 }
-const port = normalizePort(process.env.PORT || "3000")
+const port = normalizePort(process.env.PORT || "4000")
 app.set("port", port)
 
 const errorHandler = error => {
@@ -43,3 +43,4 @@ server.on("listening", () => {
   const bind = typeof address === "string" ? "pipe " + address : "port " + port
   console.log("Listening on " + bind)
 })
+server.listen(port)
