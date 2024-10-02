@@ -2,6 +2,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const booksRoutes = require("./routes/books")
 const userRoutes = require("./routes/user")
+const path = require("path")
 
 mongoose
   .connect("mongodb+srv://ingridseurin:GeronimoMVG@mycluster.mu9cg.mongodb.net/?retryWrites=true&w=majority&appName=myCluster")
@@ -18,7 +19,7 @@ app.use((req, res, next) => {
 })
 
 app.use(express.json())
-
+app.use("/images", express.static(path.join(__dirname, "images")))
 app.use("/api/books", booksRoutes)
 app.use("/api/auth", userRoutes)
 
