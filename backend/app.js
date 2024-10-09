@@ -1,3 +1,4 @@
+require("dotenv").config()
 const express = require("express")
 const mongoose = require("mongoose")
 const booksRoutes = require("./routes/books")
@@ -6,7 +7,7 @@ const path = require("path")
 const app = express()
 
 mongoose
-  .connect("mongodb+srv://ingridseurin:GeronimoMVG@mycluster.mu9cg.mongodb.net/?retryWrites=true&w=majority&appName=myCluster")
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"))
 
@@ -18,9 +19,10 @@ app.use((req, res, next) => {
   next()
 })
 
-//middlewares gestion des JSON, fichiers images et routes
+//middlewares gestion des JSON et fichiers images
 app.use(express.json())
 app.use("/images", express.static(path.join(__dirname, "images")))
+
 app.use("/api/books", booksRoutes)
 app.use("/api/auth", userRoutes)
 
