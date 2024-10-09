@@ -43,8 +43,8 @@ exports.modifyBook = (req, res, next) => {
   // Recherche livre (ID)
   Book.findOne({ _id: req.params.id })
     .then(book => {
-      if (book.userId != req.auth.userId) {
-        return res.status(401).json({ message: "Non autorisé" }) // si utilisateur != créateur du livre
+      if (book.userId !== req.auth.userId) {
+        return res.status(401).json({ message: "Non autorisé" }) // si utilisateur !== créateur du livre
       }
 
       // Suppr ancienne image si nouvelle téléchargée
@@ -72,7 +72,7 @@ exports.modifyBook = (req, res, next) => {
 exports.deleteBook = (req, res, next) => {
   Book.findOne({ _id: req.params.id })
     .then(book => {
-      if (book.userId != req.auth.userId) {
+      if (book.userId !== req.auth.userId) {
         return res.status(401).json({ message: "Non autorisé" })
       }
 

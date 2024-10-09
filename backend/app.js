@@ -17,7 +17,8 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS")
   next()
 })
-//middleware gestion des JSON, fichiers statiques
+
+//middlewares gestion des JSON, fichiers images et routes
 app.use(express.json())
 app.use("/images", express.static(path.join(__dirname, "images")))
 app.use("/api/books", booksRoutes)
