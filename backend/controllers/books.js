@@ -44,7 +44,7 @@ exports.modifyBook = (req, res, next) => {
   Book.findOne({ _id: req.params.id })
     .then(book => {
       if (book.userId !== req.auth.userId) {
-        return res.status(401).json({ message: "Non autorisé" }) // si utilisateur !== créateur du livre
+        return res.status(403).json({ message: "403:unauthorized request" }) // si utilisateur !== créateur du livre
       }
 
       // Suppr ancienne image si nouvelle téléchargée
@@ -73,7 +73,7 @@ exports.deleteBook = (req, res, next) => {
   Book.findOne({ _id: req.params.id })
     .then(book => {
       if (book.userId !== req.auth.userId) {
-        return res.status(401).json({ message: "Non autorisé" })
+        return res.status(403).json({ message: "403:unauthorized request" })
       }
 
       const filename = book.imageUrl.split("/images/")[1] // créa nom de fichier image
